@@ -1,6 +1,6 @@
 let data = {}
-let listener;
-
+let listener = io.connect('http://localhost:3000/')
+let topX = 50;
 let sliderVal = 50;
 let leftscore = 0;
 let rightscore = 0;
@@ -15,34 +15,36 @@ const sketch = p => {
      p.createCanvas(lowRez * 3, lowRez * 3);
      puck = new Puck(p);
      bottom = new Paddle(p, false)
-      top = new Paddle(p, true)
+     top = new Paddle(p, true)
 
-      listener = io.connect('http://localhost:3000/')
-      listener.on('Xval', newVal)
    };
-   
- 
+
+
    p.draw = function() {
      p.background(0);
-     puck.show()
-     puck.update()
-     puck.edges()
+   //   puck.show()
+   //   puck.update()
+   //   puck.edges()
 
-     paddleSlider.addEventListener('input', () => {
-         bottom.changeSlider(paddleSlider.value)
-         top.changeSlider(paddleSlider.value)
-         bottom.updateData(data)
-         listener.emit('Xval', data) 
-    })
 
      bottom.show()
-     top.show()
-     puck.checkPaddleBottom(bottom);
-     puck.checkPaddleTop(top);
+     top.showTop(topX)
+   //   puck.checkPaddleBottom(bottom);
+   //   puck.checkPaddleTop(top);
 
    };
 
- };
+   paddleSlider.addEventListener('input', () => {
+      bottom.changeSlider(paddleSlider.value)
+      bottom.updateData(data)
+      listener.emit('Xval', data) 
+ })
+
+   listener.on('Xval', (data) => {
+      topX = data.x
+   })
+
+};
 
  new p5(sketch);
 

@@ -22,12 +22,14 @@ class Paddle {
       this.p.rect(this.x, this.y, this.w, this.h)
    }
 
-   updateData(obj) {
-      obj.x = this.x
-      
-    
+   showTop(otherX) {
+      this.p.fill(255)
+      this.p.rectMode(this.p.CENTER)
+      this.p.rect(otherX, this.y, this.w, this.h)
    }
 
-
+   updateData(obj) {
+      obj.x = this.x 
+   }
 
 }
