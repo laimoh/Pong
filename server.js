@@ -13,5 +13,13 @@ let numOfPeople = 0;
 
 function newConnect(person) {
    console.log(person.id)
+
+   // if (numOfPeople === 2) {
+      person.on('Xval', (data) => {
+         // console.log(data)
+         person.broadcast.emit('Xval', data)
+      })
+
+   // }
 }
 
