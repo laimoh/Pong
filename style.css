@@ -1,0 +1,20 @@
+* {
+   background-color: black;
+}
+
+#defaultCanvas0 {
+   position: absolute;
+   left: 50%;
+   top: 50%;
+   transform: translate(-50%, -50%);
+   border: 1px white solid;
+}
+
+.paddle {
+   position: absolute;
+   width: 45vw;
+   left: 50%;
+   transform: translateX(-50%);
+   top: 65vh;
+}
+

@@ -1,0 +1,24 @@
+{
+  "name": "pong2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Paddle.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/laimoh/Pong.git"
+  },
+  "keywords": [
+    "pong",
+    "socket.io",
+    "minigame"
+  ],
+  "author": "Laiqa Mohid",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/laimoh/Pong/issues"
+  },
+  "homepage": "https://github.com/laimoh/Pong#readme"
+}
