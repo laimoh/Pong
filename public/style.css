@@ -1,0 +1,55 @@
+* {
+   background-color: black;
+}
+
+.wrapper {
+   position: absolute;
+   left: 50%;
+   top: 50%;
+   transform: translate(-50%, -50%);
+   height: 50vh;
+   width: 75vw;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-evenly;
+   text-align: center;
+  
+}
+
+a, a:visited {
+   color: rgb(212, 212, 212);
+   text-decoration: none;
+}
+
+h1 {
+   color: rgb(255, 255, 255);
+   font-size: 3rem;
+   font-family: 'DotGothic16', sans-serif;
+  
+}
+
+.connectButton, .highscorebtn {
+   font-family: 'DotGothic16', sans-serif;
+   font-size: 2rem;
+   padding: 5px;
+   margin: 10px;
+   color: rgb(212, 212, 212);
+}
+
+
+#defaultCanvas0 {
+   position: absolute;
+   left: 50%;
+   top: 50%;
+   transform: translate(-50%, -50%);
+   border: 1px white solid;
+}
+
+.paddle {
+   position: absolute;
+   width: 45vw;
+   left: 50%;
+   transform: translateX(-50%);
+   top: 65vh;
+}
+
