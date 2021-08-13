@@ -1,35 +1,31 @@
 class Paddle {
-   constructor(p, isTop) {
-      this.p = p
-      this.w = 40
-      this.h = 10
-      this.x = p.width/2
+   constructor(isTop, highRez) {
+      this.w = 15 * highRez
+      this.h = 5 * highRez
+      this.x = width/2
 
       if (!isTop) {
-         this.y =  p.height - this.h/2
+         this.y =  height - this.h/2
        } else {
          this.y = this.h/2;
        }
    }
 
    changeSlider(x) {
-      this.x = this.p.floor(this.p.map(x, 0, 100, this.w/2, this.p.width - this.w/2))
+      this.x = floor(map(x, 0, 100, this.w/2, width - this.w/2))
    }
 
    show() {
-      this.p.fill(255)
-      this.p.rectMode(this.p.CENTER)
-      this.p.rect(this.x, this.y, this.w, this.h)
+      fill(255)
+      rectMode(CENTER)
+      rect(this.x, this.y, this.w, this.h)
    }
 
    showTop(otherX) {
-      this.p.fill(255)
-      this.p.rectMode(this.p.CENTER)
-      this.p.rect(otherX, this.y, this.w, this.h)
+      fill(255)
+      rectMode(CENTER)
+      rect(otherX, this.y, this.w, this.h)
    }
 
-   updatePaddle(obj) {
-      obj.x = this.x 
-   }
 
 }

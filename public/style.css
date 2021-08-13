@@ -1,5 +1,5 @@
 * {
-   background-color: black;
+   background-color: rgb(63, 63, 63);
 }
 
 .wrapper {
@@ -17,12 +17,12 @@
 }
 
 a, a:visited {
-   color: rgb(212, 212, 212);
+   color: rgb(0, 0, 0);
    text-decoration: none;
 }
 
 h1 {
-   color: rgb(255, 255, 255);
+   color: rgb(0, 0, 0);
    font-size: 3rem;
    font-family: 'DotGothic16', sans-serif;
   
@@ -33,7 +33,7 @@ h1 {
    font-size: 2rem;
    padding: 5px;
    margin: 10px;
-   color: rgb(212, 212, 212);
+   color: rgb(0, 0, 0);
 }
 
 
@@ -42,7 +42,7 @@ h1 {
    left: 50%;
    top: 50%;
    transform: translate(-50%, -50%);
-   border: 1px white solid;
+   border: 1px rgb(0, 0, 0) solid;
 }
 
 .paddle {
@@ -50,6 +50,15 @@ h1 {
    width: 45vw;
    left: 50%;
    transform: translateX(-50%);
-   top: 65vh;
+   top: 75vh;
 }
 
+.intro {
+   font-family: 'DotGothic16', sans-serif;
+   display: block;
+   font-size: 1rem;
+   padding: 5px;
+   margin: auto;
+   text-align: center;
+   color: rgb(0, 0, 0);
+}
