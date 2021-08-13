@@ -28,7 +28,7 @@ class Paddle {
       this.p.rect(otherX, this.y, this.w, this.h)
    }
 
-   updateData(obj) {
+   updatePaddle(obj) {
       obj.x = this.x 
    }
 

@@ -14,9 +14,14 @@ class Puck {
       this.p.ellipse(this.x, this.y, this.r * 2)
    }
 
-   update() {
+   move() {
       this.x += this.xspeed;
       this.y += this.yspeed;
+   }
+
+   updatePuckState(obj) {
+      obj.puckX = this.x
+      obj.puckY = this.y
    }
 
    reset() {

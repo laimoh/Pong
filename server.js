@@ -9,17 +9,28 @@ const listener = socket(server);
 
 // when an IP tries to connect to server
 listener.sockets.on('connection', newConnect)
-let numOfPeople = 0;
+// let count = 0;
+let players = []
+
+function Player(id, x, y) {
+   this.id = id
+   this.x = x
+   this.y = y
+}
 
 function newConnect(person) {
-   console.log(person.id)
+   // count++;
+   // console.log("number of users: " + count);
+   console.log("new connnection at: " + person.id);
+   // person.emit('init', {connected: count})
 
-   // if (numOfPeople === 2) {
-      person.on('Xval', (data) => {
-         // console.log(data)
-         person.broadcast.emit('Xval', data)
-      })
+   person.on('start', (data) => {
 
-   // }
+      console.log(data.x + ' ' + data.y)
+      let player = new Player(person.id, data.x ,data.y)
+      players.push(player)
+   
+   })
+
 }
 
