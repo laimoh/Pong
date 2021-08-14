@@ -42,7 +42,7 @@ h1 {
    left: 50%;
    top: 50%;
    transform: translate(-50%, -50%);
-   border: 1px rgb(0, 0, 0) solid;
+   border: 2px rgb(0, 0, 0) solid;
 }
 
 .paddle {

@@ -8,7 +8,7 @@ function Puck(id,x,y,r,xs,ys) {
   
  }
  
- function Player(id,x,y,w,h){
+ function Player(id,x,y,w,h,p){
     this.id = id;
     this.x = x;
     this.y = y;
@@ -31,13 +31,13 @@ function Puck(id,x,y,r,xs,ys) {
  let players = []
  let puck;
  
- setInterval(heartbeat, 33);
+ setInterval(heartbeat, 10);
  
  function heartbeat() {
     listener.sockets.emit('heartbeat', players);
  }
  
- setInterval(heartbeatPuck, 33);
+ setInterval(heartbeatPuck, 10);
  
  function heartbeatPuck() {
     listener.sockets.emit('heartbeatPuck', puck);
@@ -62,12 +62,13 @@ function Puck(id,x,y,r,xs,ys) {
        let p;
        for ( let i = 0; i < players.length; i++ ) {
           if (person.id === players[i].id)
-             p = players[i];
+            { p = players[i] }
        }
        p.x = data.x;
        p.y = data.y;
        p.w = data.w;
        p.h = data.h;
+      
     }); 
  
     person.on('updateBall',function(data) {
@@ -76,7 +77,6 @@ function Puck(id,x,y,r,xs,ys) {
        puck.r = data.r;
        puck.xs = data.xs;
        puck.ys = data.ys;
- 
     }); 
  
  }

@@ -3,8 +3,8 @@ class Puck {
       this.x = width / 2;
       this.y = height / 2;
       this.r = 2 * highRez
-      this.xspeed = 0.1 * highRez
-      this.yspeed = 0.3 * highRez
+      this.xs = (0.4 * highRez)
+      this.ys = (0.5 * highRez)
    }
 
    show() {
@@ -13,39 +13,16 @@ class Puck {
    }
 
    move() {
-      this.x += this.xspeed;
-      this.y += this.yspeed;
-   }
-
-   reset() {
-      this.x = this.width / 2;
-      this.y = this.height / 2;
-   }
-
-   edges() {
-      if (this.x < 0 || this.x > this.width) {
-         this.xspeed *= -1;
-      }
-
-      if (this.y - this.r > this.height) {
-         //  ding.play();
-         // leftscore++;
-         this.reset();
-      }
-
-      if (this.y + this.r < 0) {
-         //  ding.play();
-         //  rightscore++;
-          this.reset();
-      }  
+      this.x += this.xs;
+      this.y += this.ys;
    }
 
    checkPaddleBottom(paddle) {
       
       if (this.y + this.r > paddle.y - paddle.h / 2 &&
-         this.x + this.r > paddle.x - paddle.w/2 &&
-         this.x + this.r < paddle.x + paddle.w/2) {
-            this.yspeed *= -1
+         this.x + this.r > paddle.x - paddle.w / 2 &&
+         this.x + this.r < paddle.x + paddle.w / 2) {
+            this.ys *= -1
       }
    }
     checkPaddleTop(paddle) {
@@ -53,9 +30,8 @@ class Puck {
       if (this.y - this.r < paddle.y + paddle.h / 2 &&
          this.x + this.r > paddle.x - paddle.w/2 &&
          this.x + this.r < paddle.x + paddle.w/2) {
-            this.yspeed *= -1
+            this.ys *= -1
       }
    }
-
 
 }

@@ -3,7 +3,7 @@ class Paddle {
       this.w = 15 * highRez
       this.h = 5 * highRez
       this.x = width/2
-
+      this.isTop = isTop
       if (!isTop) {
          this.y =  height - this.h/2
        } else {
@@ -21,7 +21,7 @@ class Paddle {
       rect(this.x, this.y, this.w, this.h)
    }
 
-   showTop(otherX) {
+   showOther(otherX) {
       fill(255)
       rectMode(CENTER)
       rect(otherX, this.y, this.w, this.h)
