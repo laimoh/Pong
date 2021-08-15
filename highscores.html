@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
+<script src="https://cdn.socket.io/3.1.3/socket.io.min.js" integrity="sha384-cPwlPLvBTa3sKAgddT6krw0cJat7egBga3DJepJyrLl4Q9/5WLra3rrnMcyTyOnh" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+   <title>Pong</title>
+</head>
+<body>
+   <div class="wrapper">
+      <p>Highscores</p>
+      <div class="scores"></div>
+   </div>
+   <script>
+      let socket = io.connect('http://localhost:3000');
+      socket.emit('getHighscores')
+      socket.on('score', (data) => {
+         console.log(data)
+         let scores = document.querySelector('.scores');
+
+         for (let [key, value] of Object.entries(data)) {
+            scores.innerHTML = `<p> ${key} ------------${value}</p>`
+            console.log(key, value);
+         }
+      })
+   </script>
+</body>
+</html>

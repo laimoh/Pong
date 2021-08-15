@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <script src="https://cdn.socket.io/3.1.3/socket.io.min.js" integrity="sha384-cPwlPLvBTa3sKAgddT6krw0cJat7egBga3DJepJyrLl4Q9/5WLra3rrnMcyTyOnh" crossorigin="anonymous"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/addons/p5.sound.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+   <title>Pong</title>
+</head>
+<body>
+   <div class="intro"></div>
+   <div class="wins">
+      <p class="player">Player 1 : <span class="player1"></span></p>
+      <p class="player">Player 2 : <span class="player2"></span></p>
+   </div>
+   <div class="timer"></div>
+   <input type="range" min="1" max="100" value="50" class="paddle" id="paddle">
+   <div class="finish remove"></div>
+   <div class="enterName remove">
+      <p>NEW HIGHSCORE</p>
+      <p>Enter Alias ( Max 3 characters):</p>
+      <input type="text" id="enterName" placeholder="..." required
+         minlength="0" maxlength="3" size="3">
+         <button class="submit">ツ</button>
+   </div>
+   <!-- <div class="backHome remove"><a href="index.html"></a></div> -->
+   <script src="Paddle.js"></script>
+   <script src="Puck.js"></script>
+   <script src="sketch.js"></script>
+</body>
+</html>
