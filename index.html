@@ -7,15 +7,37 @@
    <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
+<script src="https://cdn.socket.io/3.1.3/socket.io.min.js" integrity="sha384-cPwlPLvBTa3sKAgddT6krw0cJat7egBga3DJepJyrLl4Q9/5WLra3rrnMcyTyOnh" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
    <title>Pong</title>
 </head>
 <body>
    <div class="wrapper">
       <h1>Welcome to Ultimate Pong!</h1>
-      <button class="connectButton"><a href="game.html">Connect to game?</a></button>
+      <button class="connectButton">Connect to game?</button>
+      <!-- <button class="connectButton"><a href="game.html">Connect to game?</a></button> -->
       <button class="highscorebtn"><a href="highscores.html">Highscores</a></button>
+      <div class="server remove"></div>
    </div>
-   
+   <script>
+      // let counter = 0 // num of people pressing the button
+      let socket = io.connect('http://localhost:3000');
+      let connect = document.querySelector('.connectButton')
+      let greeting = document.querySelector('.server')
+      connect.addEventListener('click', () => {
+         socket.emit('getCounter', message => { 
+            greeting.classList.remove('remove')
+            if (message <= 2 ) {
+               greeting.innerHTML = "Hello, taking you to the game..."
+               setTimeout(() => {
+                        window.location.replace("./game.html");
+               }, 1000)
+            } else {
+               greeting.innerHTML = "Please wait... game in progress ^_^"
+               setTimeout(() => {greeting.classList.add('remove')}, 800)
+            }
+         })
+      })
+   </script>
 </body>
 </html>

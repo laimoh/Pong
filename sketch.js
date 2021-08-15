@@ -1,4 +1,4 @@
-let socket;
+let socket = io.connect('http://localhost:3000');;
 let player;
 let puck;
 let start = false;
@@ -13,22 +13,25 @@ let currentHighest = 0
 const paddleSlider = document.getElementById('paddle')
 const intro = document.querySelector('.intro')
 const finish = document.querySelector('.finish')
+
+function preload() {
+   soundFormats('mp3', 'ogg');
+   mySound = loadSound('assets/doorbell');
+ }
+
 function setup() {
    createCanvas(64 * highRez, 64 * highRez);
-   socket = io.connect('http://localhost:3000');
 
    puck = new Puck(highRez);
-
-   socket.on('getCounter', (connections) => {
-      counter = connections
+   socket.on('startGame', (connections) => {
 
       if (player === undefined) {
-         if (counter % 2 === 0) {
-            player = new Paddle(true, highRez)
-         } // top
-         else {
+         if (connections % 2 === 0) {
             player = new Paddle(false, highRez)
-         } // bottom
+         } 
+         else {
+            player = new Paddle(true, highRez)
+         } 
       }
       let playerData = {
          x: player.x,
@@ -36,7 +39,9 @@ function setup() {
          w: player.w,
          h: player.h,
       };
+
       socket.emit('start', playerData);
+
       let puckData = {
          x: puck.x,
          y: puck.y,
@@ -44,18 +49,19 @@ function setup() {
          xs: puck.xs,
          ys: puck.ys
       };
+
       socket.emit('startBall', puckData);
-      console.log(counter)
-      if (counter === 2) {
+
+      if (connections === 2) {
          start = true;
       }
    })
 
-   socket.on('heartbeat', function (data) {
+ socket.on('heartbeat', function (data) {
       players = data;
-   });
+});
 
-   socket.on('heartbeatPuck', function (data) {
+ socket.on('heartbeatPuck', function (data) {
       if (data !== null) {
          puck.x = data.x,
             puck.y = data.y,
@@ -63,16 +69,17 @@ function setup() {
             puck.xs = data.xs,
             puck.ys = data.ys
       }
-   });
+ });
 }
 
 
 function draw() {
    background(64);
    fill(255)
-
+   console.log(start)
    if (start === false) {
       intro.innerHTML = 'Waiting for player 2'
+    
    } else {
       if (player.isTop) {
          intro.innerHTML = 'You are the top paddle, Player 2'
@@ -89,7 +96,6 @@ function game() {
    showPoints()
    if (timer === 0) {
       endGame()
-      console.log(topScore, botScore)
       } else {
       loop()
    }
@@ -161,7 +167,6 @@ function showPoints() {
    document.querySelector('.player1').innerHTML = botScore
 }
 
-
 function endGame() {
    finish.classList.remove('remove')
       if (topScore > botScore) {
@@ -172,7 +177,7 @@ function endGame() {
                currentHighest = topScore
             }
          } else {
-            finish.innerHTML = `YOU LOSE - SCORE: ${botScore} "<br><a href='./index.html'>BACK TO HOME?</a>`
+            finish.innerHTML = `YOU LOSE - SCORE: ${botScore} <br><a href='./index.html'>BACK TO HOME?</a>`
          }
       } else if (botScore > topScore) {
          if (!player.isTop) {
@@ -181,12 +186,13 @@ function endGame() {
                setTimeout(newHighscore, 1200, botScore);
                currentHighest = botScore
             }
-         } else {
-            finish.innerHTML = `YOU LOSE - SCORE: ${topScore} <br><a href='./index.html'>BACK TO HOME?</a>`
+            } else {
+               finish.innerHTML = `YOU LOSE - SCORE: ${topScore} <br><a href='./index.html'>BACK TO HOME?</a>`
+            }
+         } else if (botScore === topScore) {
+            finish.innerHTML = `IT'S A TIE - SCORE: ${topScore} <br><a href='./index.html'>BACK TO HOME?</a>`
          }
-      } else if (botScore === topScore) {
-         finish.innerHTML = `IT'S A TIE - SCORE: ${topScore} <br> <a href='./index.html'>BACK TO HOME?</a>`
-      }
+   players = []
    noLoop()
    socket.emit('endgame');
 }
@@ -202,8 +208,6 @@ function newHighscore(score) {
          score: score
       }
       socket.emit('newHighscore', newScore);
-      console.log(newScore)
       enterName.innerHTML = "<br>"+ "ALL DONE" + "<br>"+"<a href='./index.html'>BACK TO HOME?</a>"
-
    })
 } 
